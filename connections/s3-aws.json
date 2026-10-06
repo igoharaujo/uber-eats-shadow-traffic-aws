@@ -1,0 +1,16 @@
+{
+    "kind": "s3",
+    "description": "AWS S3 bucket for Uber Eats data",
+    "config": {
+        "kind": "s3",
+        "connectionConfigs": {
+            "region": "us-east-1",
+            "bucket": "owshq-shadow-traffic"
+        },
+        "batchConfigs": {
+            "lingerMs": 2000,
+            "batchElements": 10000,
+            "batchBytes": 5242880
+        }
+    }
+}

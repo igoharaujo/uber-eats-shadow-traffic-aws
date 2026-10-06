@@ -1,0 +1,486 @@
+{
+  "generators": [
+    {
+      "bucket": "owshq-shadow-traffic",
+      "bucketConfigs": {
+        "keyPrefix": "cdc/mssql/users/",
+        "format": "jsonl"
+      },
+      "data": {
+        "sequenceNum": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "operation": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {
+              "weight": 6,
+              "value": "INSERT"
+            },
+            {
+              "weight": 3,
+              "value": "UPDATE"
+            },
+            {
+              "weight": 1,
+              "value": "DELETE"
+            }
+          ]
+        },
+        "user_id": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "uuid": {
+          "_gen": "uuid"
+        },
+        "first_name": {
+          "_gen": "string",
+          "expr": "#{Name.firstName}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "last_name": {
+          "_gen": "string",
+          "expr": "#{Name.lastName}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "cpf": {
+          "_gen": "string",
+          "expr": "#{numerify '###.###.###-##'}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "birthday": {
+          "_gen": "formatDateTime",
+          "ms": {
+            "_gen": "uniformDistribution",
+            "bounds": [
+              -1893456000000,
+              -441763200000
+            ]
+          },
+          "format": "yyyy-MM-dd"
+        },
+        "company_name": {
+          "_gen": "string",
+          "expr": "#{Company.name}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "job": {
+          "_gen": "string",
+          "expr": "#{Job.title}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "phone_number": {
+          "_gen": "string",
+          "expr": "#{PhoneNumber.phoneNumber}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "country": {
+          "_gen": "oneOf",
+          "choices": [
+            "BR"
+          ]
+        },
+        "dt_current_timestamp": {
+          "_gen": "formatDateTime",
+          "ms": {
+            "_gen": "now"
+          },
+          "format": "yyyy-MM-dd HH:mm:ss.SSS"
+        }
+      }
+    },
+    {
+      "bucket": "owshq-shadow-traffic",
+      "bucketConfigs": {
+        "keyPrefix": "cdc/mongodb/users/",
+        "format": "jsonl"
+      },
+      "data": {
+        "sequenceNum": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "operation": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {
+              "weight": 6,
+              "value": "INSERT"
+            },
+            {
+              "weight": 3,
+              "value": "UPDATE"
+            },
+            {
+              "weight": 1,
+              "value": "DELETE"
+            }
+          ]
+        },
+        "user_id": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "uuid": {
+          "_gen": "uuid"
+        },
+        "cpf": {
+          "_gen": "lookup",
+          "bucket": "owshq-shadow-traffic",
+          "keyPrefix": "cdc/mssql/users/",
+          "path": [
+            "data",
+            "cpf"
+          ]
+        },
+        "email": {
+          "_gen": "string",
+          "expr": "#{Internet.emailAddress}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "phone_number": {
+          "_gen": "string",
+          "expr": "#{PhoneNumber.phoneNumber}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "delivery_address": {
+          "_gen": "string",
+          "expr": "#{Address.fullAddress}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "city": {
+          "_gen": "string",
+          "expr": "#{Address.city}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "country": {
+          "_gen": "oneOf",
+          "choices": [
+            "BR"
+          ]
+        },
+        "dt_current_timestamp": {
+          "_gen": "formatDateTime",
+          "ms": {
+            "_gen": "now"
+          },
+          "format": "yyyy-MM-dd HH:mm:ss.SSS"
+        }
+      }
+    },
+    {
+      "bucket": "owshq-shadow-traffic",
+      "bucketConfigs": {
+        "keyPrefix": "cdc/postgres/drivers/",
+        "format": "jsonl"
+      },
+      "data": {
+        "sequenceNum": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "operation": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {
+              "weight": 6,
+              "value": "INSERT"
+            },
+            {
+              "weight": 3,
+              "value": "UPDATE"
+            },
+            {
+              "weight": 1,
+              "value": "DELETE"
+            }
+          ]
+        },
+        "driver_id": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "uuid": {
+          "_gen": "uuid"
+        },
+        "first_name": {
+          "_gen": "string",
+          "expr": "#{Name.firstName}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "last_name": {
+          "_gen": "string",
+          "expr": "#{Name.lastName}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "date_birth": {
+          "_gen": "formatDateTime",
+          "ms": {
+            "_gen": "uniformDistribution",
+            "bounds": [
+              -2524608000000,
+              7258118400000
+            ]
+          },
+          "format": "yyyy-MM-dd"
+        },
+        "city": {
+          "_gen": "string",
+          "expr": "#{Address.city}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "country": {
+          "_gen": "oneOf",
+          "choices": [
+            "BR"
+          ]
+        },
+        "phone_number": {
+          "_gen": "string",
+          "expr": "#{PhoneNumber.phoneNumber}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "license_number": {
+          "_gen": "string",
+          "expr": "#{bothify '??#######'}"
+        },
+        "vehicle_type": {
+          "_gen": "oneOf",
+          "choices": [
+            "Motorcycle",
+            "Car",
+            "Bicycle",
+            "Scooter",
+            "E-Bike",
+            "Walk"
+          ]
+        },
+        "vehicle_make": {
+          "_gen": "string",
+          "expr": "#{Company.name}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "vehicle_model": {
+          "_gen": "string",
+          "expr": "#{Commerce.productName}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "vehicle_year": {
+          "_gen": "uniformDistribution",
+          "bounds": [
+            1980,
+            2024
+          ],
+          "decimals": 0
+        },
+        "dt_current_timestamp": {
+          "_gen": "formatDateTime",
+          "ms": {
+            "_gen": "now"
+          },
+          "format": "yyyy-MM-dd HH:mm:ss.SSS"
+        }
+      }
+    },
+    {
+      "bucket": "owshq-shadow-traffic",
+      "bucketConfigs": {
+        "keyPrefix": "cdc/mysql/restaurants/",
+        "format": "jsonl"
+      },
+      "data": {
+        "sequenceNum": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "operation": {
+          "_gen": "weightedOneOf",
+          "choices": [
+            {
+              "weight": 6,
+              "value": "INSERT"
+            },
+            {
+              "weight": 3,
+              "value": "UPDATE"
+            },
+            {
+              "weight": 1,
+              "value": "DELETE"
+            }
+          ]
+        },
+        "restaurant_id": {
+          "_gen": "sequentialInteger",
+          "startingFrom": 1
+        },
+        "uuid": {
+          "_gen": "uuid"
+        },
+        "name": {
+          "_gen": "string",
+          "expr": "#{Company.name} Restaurante",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "address": {
+          "_gen": "string",
+          "expr": "#{Address.streetAddress}\\n#{Address.city} - #{Address.stateAbbr}\\n#{Address.zipCode}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "city": {
+          "_gen": "string",
+          "expr": "#{Address.city}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "country": {
+          "_gen": "oneOf",
+          "choices": [
+            "BR"
+          ]
+        },
+        "phone_number": {
+          "_gen": "string",
+          "expr": "#{PhoneNumber.phoneNumber}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "cuisine_type": {
+          "_gen": "oneOf",
+          "choices": [
+            "Italian",
+            "Chinese",
+            "Japanese",
+            "Mexican",
+            "Indian",
+            "American",
+            "French"
+          ]
+        },
+        "opening_time": {
+          "_gen": "oneOf",
+          "choices": [
+            "08:00 AM",
+            "09:00 AM",
+            "10:00 AM",
+            "11:00 AM"
+          ]
+        },
+        "closing_time": {
+          "_gen": "oneOf",
+          "choices": [
+            "06:00 PM",
+            "08:00 PM",
+            "10:00 PM",
+            "11:00 PM"
+          ]
+        },
+        "average_rating": {
+          "_gen": "uniformDistribution",
+          "bounds": [
+            0.0,
+            5.0
+          ],
+          "decimals": 1
+        },
+        "num_reviews": {
+          "_gen": "uniformDistribution",
+          "bounds": [
+            0,
+            10000
+          ],
+          "decimals": 0
+        },
+        "cnpj": {
+          "_gen": "string",
+          "expr": "#{numerify '##.###.###/####-##'}",
+          "locale": [
+            "pt",
+            "BR"
+          ]
+        },
+        "dt_current_timestamp": {
+          "_gen": "formatDateTime",
+          "ms": {
+            "_gen": "now"
+          },
+          "format": "yyyy-MM-dd HH:mm:ss.SSS"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "s3": {
+      "kind": "s3",
+      "connectionConfigs": {
+        "region": "us-east-1",
+        "bucket": "owshq-shadow-traffic"
+      },
+      "batchConfigs": {
+        "lingerMs": 2000,
+        "batchElements": 10000,
+        "batchBytes": 5242880
+      }
+    }
+  }
+}
